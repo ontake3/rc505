@@ -34,3 +34,10 @@ audio {
     margin: 0 auto;
   }
 }
+
+.reset:active,.reset2:active,.reset3:active,.reset4:active,.reset5:active {
+  /* マウスオーバー時に背景色をグレーに変更 */
+  color: #01DF01;
+  border:6px solid #01DF01;
+}
+

@@ -1,3 +1,32 @@
+(function () {
+  'use strict';
+  var
+    wait = 1500,
+    standby = true,
+    command = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+    length = command.length,
+    index = 0,
+    timer = null;
+  document.addEventListener('keydown', function (ev) {
+    clearTimeout(timer);
+    if (standby && ev.keyCode === command[index]) {
+      index++
+      if (index >= length) {
+        standby = false;
+        index = 0;
+
+        console.log("アイウエオ");
+
+      } else {
+        timer = setTimeout(function () {
+          index = 0;
+        }, wait);
+      }
+    } else {
+      index = 0;
+    }
+  });
+})();
 // アプリの基本変数を設定する
 var record = document.querySelector('.record');
 var record2 = document.querySelector('.record2');
@@ -12,6 +41,7 @@ var reset5 = document.querySelector('.reset5');
 var soundClips = document.querySelector('.sound-clips');
 var canvas = document.querySelector('.visualizer');
 var mainSection = document.querySelector('.main-controls');
+var audio = document.createElement('audio');
 
 // visualiser setup - Web Audio API Contextとcanvasを作成する
 
@@ -30,11 +60,12 @@ if (navigator.mediaDevices.getUserMedia) {
     var mediaRecorder = new MediaRecorder(stream);
     visualize(stream);
 
+
     //トラック１
     var countA = 0
     record.onclick = function () {
       document.getElementById("btn1").innerHTML = ++countA;
-      if (countA > 3) {
+      if (countA > 2) {
         countA = 1;
       }
       if (countA == 1) {
@@ -43,30 +74,28 @@ if (navigator.mediaDevices.getUserMedia) {
         console.log("recorder started");
         document.getElementById('btn1').style.color = 'red';
         document.getElementById('btn1').style.border = '8px solid red';
-
       } else if (countA == 2) {
         mediaRecorder.stop();
         console.log(mediaRecorder.state);
         console.log("recorder stopped");
-        document.getElementById('btn1').style.color = '#ff7f50';
-        document.getElementById('btn1').style.border = '8px solid #ff7f50';
-
-      } else if (countA == 3) {
-        document.getElementById('btn1').style.color = '#00ff7f';
-        document.getElementById('btn1').style.border = '8px solid #00ff00';
+        document.getElementById('btn1').style.color = '#01DF01';
+        document.getElementById('btn1').style.border = '8px solid #01DF01';
       }
     };
     reset.onclick = function () {
       countA = 0;
       document.getElementById('btn1').style.color = 'gray';
       document.getElementById('btn1').style.border = '8px solid gray';
+      audio.pause();
+      audio.currentTime = 0;
     }
+
 
     //トラック２
     var countB = 0
     record2.onclick = function () {
       document.getElementById("btn2").innerHTML = ++countB;
-      if (countB > 3) {
+      if (countB > 2) {
         countB = 1;
       }
       if (countB == 1) {
@@ -75,29 +104,28 @@ if (navigator.mediaDevices.getUserMedia) {
         console.log("recorder started");
         document.getElementById('btn2').style.color = 'red';
         document.getElementById('btn2').style.border = '8px solid red';
-
       } else if (countB == 2) {
         mediaRecorder.stop();
         console.log(mediaRecorder.state);
         console.log("recorder stopped");
-        document.getElementById('btn2').style.color = '#ff7f50';
-        document.getElementById('btn2').style.border = '8px solid #ff7f50';
-      } else if (countB == 3) {
-        document.getElementById('btn2').style.color = '#00ff7f';
-        document.getElementById('btn2').style.border = '8px solid #00ff00';
+        document.getElementById('btn2').style.color = '#01DF01';
+        document.getElementById('btn2').style.border = '8px solid #01DF01';
       }
     }
     reset2.onclick = function () {
       countB = 0;
       document.getElementById('btn2').style.color = 'gray';
       document.getElementById('btn2').style.border = '8px solid gray';
+      audio.pause();
+      audio.currentTime = 0;
     }
+
 
     //トラック３
     var countC = 0
     record3.onclick = function () {
       document.getElementById("btn3").innerHTML = ++countC;
-      if (countC > 3) {
+      if (countC > 2) {
         countC = 1;
       }
       if (countC == 1) {
@@ -106,29 +134,28 @@ if (navigator.mediaDevices.getUserMedia) {
         console.log("recorder started");
         document.getElementById('btn3').style.color = 'red';
         document.getElementById('btn3').style.border = '8px solid red';
-
       } else if (countC == 2) {
         mediaRecorder.stop();
         console.log(mediaRecorder.state);
         console.log("recorder stopped");
-        document.getElementById('btn3').style.color = '#ff7f50';
-        document.getElementById('btn3').style.border = '8px solid #ff7f50';
-      } else if (countC == 3) {
-        document.getElementById('btn3').style.color = '#00ff7f';
-        document.getElementById('btn3').style.border = '8px solid #00ff00';
+        document.getElementById('btn3').style.color = '#01DF01';
+        document.getElementById('btn3').style.border = '8px solid #01DF01';
       }
     }
     reset3.onclick = function () {
       countC = 0;
       document.getElementById('btn3').style.color = 'gray';
       document.getElementById('btn3').style.border = '8px solid gray';
+      audio.pause();
+      audio.currentTime = 0;
     }
+
 
     //トラック４
     var countD = 0
     record4.onclick = function () {
       document.getElementById("btn4").innerHTML = ++countD;
-      if (countD > 3) {
+      if (countD > 2) {
         countD = 1;
       }
       if (countD == 1) {
@@ -142,24 +169,24 @@ if (navigator.mediaDevices.getUserMedia) {
         mediaRecorder.stop();
         console.log(mediaRecorder.state);
         console.log("recorder stopped");
-        document.getElementById('btn4').style.color = '#ff7f50';
-        document.getElementById('btn4').style.border = '8px solid #ff7f50';
-      } else if (countD == 3) {
-        document.getElementById('btn4').style.color = '#00ff7f';
-        document.getElementById('btn4').style.border = '8px solid #00ff00';
+        document.getElementById('btn4').style.color = '#01DF01';
+        document.getElementById('btn4').style.border = '8px solid #01DF01';
       }
     }
     reset4.onclick = function () {
       countD = 0;
       document.getElementById('btn4').style.color = 'gray';
       document.getElementById('btn4').style.border = '8px solid gray';
+      audio.pause();
+      audio.currentTime = 0;
     }
+
 
     //トラック５
     var countE = 0
     record5.onclick = function () {
       document.getElementById("btn5").innerHTML = ++countE;
-      if (countE > 3) {
+      if (countE > 2) {
         countE = 1;
       }
       if (countE == 1) {
@@ -173,17 +200,16 @@ if (navigator.mediaDevices.getUserMedia) {
         mediaRecorder.stop();
         console.log(mediaRecorder.state);
         console.log("recorder stopped");
-        document.getElementById('btn5').style.color = '#ff7f50';
-        document.getElementById('btn5').style.border = '8px solid #ff7f50';
-      } else if (countE == 3) {
-        document.getElementById('btn5').style.color = '#00ff7f';
-        document.getElementById('btn5').style.border = '8px solid #00ff00';
+        document.getElementById('btn5').style.color = '#01DF01';
+        document.getElementById('btn5').style.border = '8px solid #01DF01';
       }
     }
     reset5.onclick = function () {
       countE = 0;
       document.getElementById('btn5').style.color = 'gray';
       document.getElementById('btn5').style.border = '5px solid gray';
+      audio.pause();
+      audio.currentTime = 0;
     }
 
 
@@ -191,7 +217,6 @@ if (navigator.mediaDevices.getUserMedia) {
       console.log("data available after MediaRecorder.stop() called.");
 
       var clipContainer = document.createElement('article');
-      var audio = document.createElement('audio');
       var deleteButton = document.createElement('button');
 
       deleteButton.textContent = 'Delete';
@@ -202,6 +227,7 @@ if (navigator.mediaDevices.getUserMedia) {
       clipContainer.appendChild(deleteButton);
       soundClips.appendChild(clipContainer);
 
+
       audio.controls = true;
       audio.loop = true;
       var blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
@@ -209,6 +235,8 @@ if (navigator.mediaDevices.getUserMedia) {
       var audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
       console.log("recorder stopped");
+      audio.play();
+
 
       deleteButton.onclick = function (e) {
         evtTgt = e.target;
@@ -220,6 +248,7 @@ if (navigator.mediaDevices.getUserMedia) {
       chunks.push(e.data);
     }
   }
+
 
   var onError = function (err) {
     console.log('The following error occured: ' + err);
